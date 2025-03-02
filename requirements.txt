@@ -1,0 +1,4 @@
+google-auth-oauthlib==1.0.0
+google-api-python-client==2.86.0
+scikit-learn==1.2.2
+numpy==1.24.3 
