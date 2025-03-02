@@ -139,6 +139,11 @@ def get_all_unread_emails(service, user_id='me', batch_size=25) -> List[Dict[str
                 if header['name'] == 'Date':
                     email_data['date'] = header['value']
             
+            # Check if the email has a body by looking at the snippet
+            # If snippet is not empty, the email has some content
+            has_body = bool(msg.get('snippet', '').strip())
+            email_data['has_body'] = has_body
+            
             # Skip body content for faster processing
             email_data['body'] = ''
             
@@ -222,7 +227,7 @@ def save_categories_to_file(categories, filename="email_categories.csv"):
     try:
         with open(filename, 'w', encoding='utf-8', newline='') as csvfile:
             # Create CSV writer
-            fieldnames = ['Category', 'From', 'Subject', 'Date']
+            fieldnames = ['Category', 'From', 'Subject', 'Date', 'Has Body']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             
             # Write header with note about excluded emails
@@ -235,7 +240,8 @@ def save_categories_to_file(categories, filename="email_categories.csv"):
                         'Category': category,
                         'From': email.get('from', 'Unknown'),
                         'Subject': email.get('subject', 'No subject'),
-                        'Date': email.get('date', 'Unknown')
+                        'Date': email.get('date', 'Unknown'),
+                        'Has Body': email.get('has_body', False)
                     })
                     
         print(f"Categories saved to {filename}")

@@ -19,7 +19,7 @@ A Python tool that fetches unread emails from Gmail and categorizes them using m
 
 ## Installation
 
-1. Clone the repository:
+1. Clone this repository:
    ```
    git clone https://github.com/SimbaBuilds/EmailOrganizer.git
    cd EmailOrganizer
