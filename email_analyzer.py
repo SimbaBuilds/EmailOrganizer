@@ -37,9 +37,9 @@ def authenticate_gmail():
             flow = InstalledAppFlow.from_client_secrets_file(
                 'credentials.json', SCOPES)
             
-            # Set up the flow to handle external apps better
+            # Set up the flow with a specific port
             flow.run_local_server(
-                port=0,
+                port=8080,
                 prompt='consent',
                 authorization_prompt_message="Please authorize this application to access your Gmail account. When you see the 'Google hasn't verified this app' screen, click 'Advanced' and then 'Go to [App Name] (unsafe)' to proceed."
             )
